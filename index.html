@@ -15,7 +15,6 @@
     <script src="app.js" defer></script>
     <link rel="stylesheet" href="experience.css" />
     <link rel="stylesheet" href="maintenance.css" />
-    <script src="simulator.js" defer></script>
     <script src="experience.js" defer></script>
     <script src="maintenance.js" defer></script>
   </head>
@@ -101,7 +100,7 @@
         <a href="#cobertura">Explore as camadas</a
         ><a href="#beneficios">A ciência</a><a href="#exemplos">Na prática</a
         ><a href="#simulador" class="nav-cta"
-          >Simule seu telhado <span aria-hidden="true">↗</span></a
+          >Plano de cuidado <span aria-hidden="true">↗</span></a
         >
       </nav>
     </header>
@@ -441,241 +440,6 @@
               </h2>
             </div>
           </div>
-          <div class="simulator-layout">
-            <form class="sim-controls" id="sim-form">
-              <h3>Desenhe seu cenário</h3>
-              <label for="roof-area">Área do telhado <span>m²</span></label
-              ><input
-                id="roof-area"
-                type="number"
-                min="1"
-                max="10000"
-                step="any"
-                value="100"
-                required
-                aria-describedby="area-help"
-              /><small id="area-help"
-                >De 1 a 10.000 m². A área altera os volumes de água, não a
-                temperatura.</small
-              >
-              <label for="rainfall"
-                >Chuva no evento
-                <output id="rainfall-label" for="rainfall">30 mm</output></label
-              ><input
-                id="rainfall"
-                type="range"
-                min="0"
-                max="100"
-                step="1"
-                value="30"
-              />
-              <div class="range-labels">
-                <span>Sem chuva</span><span>100 mm</span>
-              </div>
-              <label for="substrate-depth">Espessura do substrato</label
-              ><select id="substrate-depth">
-                <option value="8">8 cm · camada rasa</option>
-                <option value="10" selected>
-                  10 cm · cenário de referência
-                </option>
-                <option value="15">15 cm · camada mais profunda</option>
-              </select>
-              <label for="initial-moisture">Umidade antes da chuva</label
-              ><select id="initial-moisture">
-                <option value="dry">
-                  Seco · 100% da capacidade disponível
-                </option>
-                <option value="moist" selected>Úmido · 50% disponível</option>
-                <option value="saturated">
-                  Saturado · nenhuma capacidade disponível
-                </option>
-              </select>
-              <label for="surface-temp"
-                >Superfície convencional ao sol
-                <output id="surface-label" for="surface-temp"
-                  >55 °C</output
-                ></label
-              ><input
-                id="surface-temp"
-                type="range"
-                min="40"
-                max="70"
-                value="55"
-              />
-              <div class="range-labels">
-                <span>40 °C</span><span>70 °C</span>
-              </div>
-              <label for="temp-difference"
-                >Diferença entre superfícies
-                <output id="difference-label" for="temp-difference"
-                  >17 °C</output
-                ></label
-              ><input
-                id="temp-difference"
-                type="range"
-                min="0"
-                max="22"
-                value="17"
-              /><small
-                >Hipótese ajustável de 0 a 22 °C, inspirada na faixa de cerca de
-                17–22 °C citada pela EPA. Zero permite explorar a ausência de
-                efeito.</small
-              >
-              <button type="reset" class="text-btn reset-sim">
-                ↺ Restaurar cenário inicial
-              </button>
-              <p id="sim-error" role="status"></p>
-            </form>
-            <div class="sim-results">
-              <div class="result-top">
-                <span>CENÁRIO EM TEMPO REAL</span
-                ><span class="educational-badge">Estimativa educativa</span>
-              </div>
-              <div class="result-stats">
-                <article>
-                  <span>Chuva recebida</span
-                  ><strong id="rain-volume">3.000 L</strong>
-                </article>
-                <article class="highlight">
-                  <span>Retida no cenário verde</span
-                  ><strong id="retained-volume">1.250 L</strong>
-                </article>
-                <article>
-                  <span>Parcela retida</span
-                  ><strong id="retained-percent">41,7%</strong>
-                </article>
-              </div>
-              <h3>Para onde vai a água?</h3>
-              <p class="chart-subtitle">
-                Litros por evento · mesma área e mesma chuva
-              </p>
-              <div
-                class="water-chart"
-                role="img"
-                id="water-chart"
-                aria-label="Comparação dos volumes de água"
-              >
-                <div class="water-row">
-                  <span>Convencional</span>
-                  <div class="water-track">
-                    <i class="water-retained" id="bar-conventional-retained"></i
-                    ><i
-                      class="water-runoff"
-                      id="bar-conventional-runoff"
-                      style="width: 100%"
-                    ></i>
-                  </div>
-                  <b id="conventional-runoff">3.000 L</b>
-                </div>
-                <div class="water-row">
-                  <span>Verde</span>
-                  <div class="water-track">
-                    <i class="water-retained" id="bar-green-retained"></i
-                    ><i class="water-runoff" id="bar-green-runoff"></i>
-                  </div>
-                  <b id="green-runoff">1.750 L</b>
-                </div>
-              </div>
-              <div class="water-legend">
-                <span><i></i>Retida</span><span><i></i>Escoamento</span>
-              </div>
-              <p class="chart-explain">
-                Os valores à direita mostram o escoamento. A cobertura
-                convencional é uma referência impermeável idealizada, com
-                retenção zero.
-              </p>
-              <div class="temperature-results">
-                <div>
-                  <span class="temp-icon" aria-hidden="true">☀</span
-                  ><span>Superfície convencional</span
-                  ><strong id="conventional-temp">55 °C</strong>
-                </div>
-                <span class="temp-arrow" aria-hidden="true">→</span>
-                <div>
-                  <span class="temp-icon" aria-hidden="true">❋</span
-                  ><span>Superfície verde hipotética</span
-                  ><strong id="green-temp">38 °C</strong>
-                </div>
-              </div>
-              <p class="temperature-note">
-                Dois experimentos independentes: a chuva representa um evento;
-                as temperaturas representam um cenário ao sol. Não calculamos
-                temperatura interna nem economia de energia.
-              </p>
-              <p
-                id="sim-summary"
-                class="sim-summary"
-                role="status"
-                aria-live="polite"
-                aria-atomic="true"
-              ></p>
-              <button type="button" id="download-scenario" class="btn forest">
-                Baixar este cenário <span aria-hidden="true">↓</span>
-              </button>
-            </div>
-          </div>
-          <details class="methodology">
-            <summary>
-              <span>Como calculamos os resultados</span
-              ><span class="method-toggle"
-                ><span class="method-toggle-label">Ver fórmulas</span
-                ><svg
-                  class="method-chevron"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="m6 9 6 6 6-6"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  /></svg
-              ></span>
-            </summary>
-            <div>
-              <h3>Um modelo simples, com as contas à vista.</h3>
-              <p>
-                <b>Chuva recebida (L)</b> = área (m²) × chuva (mm). Uma lâmina
-                de 1 mm sobre 1 m² equivale a 1 litro.
-              </p>
-              <p>
-                <b>Capacidade disponível (mm)</b> = espessura do substrato (mm)
-                × 0,25 × fração disponível. Usamos 1 para seco, 0,5 para úmido e
-                0 para saturado. Essas frações são cenários didáticos, não
-                resultados de uma medição.
-              </p>
-              <p>
-                <b>Água retida (L)</b> = área × menor valor entre chuva e
-                capacidade disponível. <b>Escoamento (L)</b> = chuva recebida −
-                água retida. O modelo conserva o volume de água e não calcula a
-                velocidade do escoamento.
-              </p>
-              <p>
-                O fator de armazenamento de 0,25 é uma aproximação educativa: a
-                Penn State descreve que cerca de 7,6–10,2 cm de substrato podem
-                reter aproximadamente 25,4 mm de água. Não é uma propriedade
-                universal. Chuvas anteriores, intensidade, duração, drenagem e
-                espécies afetam o resultado real. Não usamos a retenção anual de
-                50–60% como se fosse uma taxa fixa de cada chuva.
-              </p>
-              <p>
-                <b>Superfície verde (°C)</b> = superfície convencional −
-                diferença escolhida. A diferença é uma hipótese do usuário,
-                baseada em uma referência de literatura; não é um modelo de
-                balanço térmico. Área, chuva e substrato não mudam essa conta. A
-                simulação de água não prevê o efeito térmico da umidade.
-              </p>
-              <p>
-                O sistema deve ser dimensionado por profissionais, inclusive
-                para peso saturado, raízes, impermeabilização e drenagem.
-                <a href="#fonte-modelo">Referência do armazenamento ↗</a> ·
-                <a href="#fonte-epa">Referência térmica ↗</a>
-              </p>
-            </div>
-          </details>
-
           <div class="mp" id="plano-manutencao">
             <div class="mp-head">
               <h3>Instalou as placas?<br /><em>Receba o plano de cuidado.</em></h3>
@@ -1083,9 +847,9 @@
                   Penn State Extension · Benefits and Design Considerations
                 </h3>
                 <p>
-                  Composição e armazenamento de água. Referência para o
-                  coeficiente simplificado do simulador: 3–4 polegadas de
-                  substrato e aproximadamente 1 polegada de água.
+                  Composição e armazenamento de água. Referência sobre
+                  substrato: 3–4 polegadas de substrato retêm aproximadamente
+                  1 polegada de água.
                 </p>
                 <a
                   href="https://extension.psu.edu/green-roofs-benefits-and-design-considerations"
@@ -1178,8 +942,8 @@
     </footer>
     <noscript
       ><p class="no-js">
-        Ative o JavaScript para explorar as camadas, usar o simulador e criar
-        seu cronograma. O conteúdo informativo continua disponível nesta página.
+        Ative o JavaScript para explorar as camadas, criar seu
+        cronograma. O conteúdo informativo continua disponível nesta página.
       </p></noscript
     >
   </body>

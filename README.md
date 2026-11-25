@@ -11,12 +11,10 @@ O projeto usa **HTML5, CSS3 e JavaScript puro**, sem etapa de build, dependênci
 - Infográfico interativo de seis camadas, com navegação por mouse e teclado.
 - Comparação visual entre coberturas convencionais e verdes em dias de sol ou chuva.
 - Cards de benefícios, dados contextualizados e links de pesquisas.
-- Simulador com área, chuva, espessura do substrato e umidade inicial.
-- Comparação térmica hipotética e download de um relatório do cenário.
 - Exemplos reais de Chicago e da California Academy of Sciences.
 - Conexões com Biologia, Física, Matemática, Geografia, Arquitetura e Tecnologia.
 - Calendário de manutenção com armazenamento no navegador e exportação `.ics`.
-- Planejador de manutenção na seção do simulador: a partir de data, local, quantidade de placas, perímetro e incidência solar, gera um cronograma anual em calendário, com passo a passo e exportação `.ics`.
+- Planejador de manutenção (seção “Mude os números”, que substituiu o simulador de água e temperatura): a partir de data, local, quantidade de placas, perímetro e incidência solar, gera um cronograma anual em calendário, com passo a passo e exportação `.ics`.
 - Layout responsivo e suporte à preferência de movimento reduzido.
 
 ## Como executar
@@ -47,7 +45,7 @@ Outra opção é abrir a pasta no VS Code e usar a extensão Live Server. Use um
 ├── styles.css             # Estilos da base original
 ├── experience.css         # Visual atual, componentes e responsividade
 ├── app.js                 # Camadas, clima e calendário de manutenção
-├── simulator.js           # Modelo matemático independente da interface
+├── simulator.js           # Modelo do simulador (não carregado na página atual)
 ├── experience.js          # Interface do simulador, gráficos e animações
 ├── maintenance.js         # Planejador de manutenção (cronograma em calendário)
 ├── maintenance.css        # Estilos do planejador de manutenção

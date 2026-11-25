@@ -106,6 +106,7 @@
       );
     }
   }
+  if (form) {
   form.addEventListener("input", update);
   form.addEventListener("change", update);
   form.addEventListener("submit", (event) => {
@@ -166,6 +167,7 @@
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   });
   update();
+  }
 
   // Give the interactive SVG the same keyboard access as the layer list.
   all(".layer-hotspot").forEach((spot, index) => {
@@ -187,7 +189,7 @@
   const diagramSvg = one("#roof-diagram svg");
   diagramSvg.setAttribute("role", "group");
   const methodology = one(".methodology");
-  methodology.addEventListener("toggle", () => {
+  if (methodology) methodology.addEventListener("toggle", () => {
     one(".method-toggle-label").textContent = methodology.open
       ? "Fechar fórmulas"
       : "Ver fórmulas";

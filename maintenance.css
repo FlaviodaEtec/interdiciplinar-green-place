@@ -1,5 +1,5 @@
 /* Green Place — planejador de manutenção (seção do simulador) */
-.mp{margin-top:56px;padding-top:48px;border-top:1px solid #d1ddc7}
+.mp{margin-top:8px}
 .mp-head h3{font-size:clamp(1.7rem,3.4vw,2.4rem);margin:0 0 10px}
 .mp-head h3 em{font-family:Georgia,"Times New Roman",serif;font-weight:400}
 .mp-head p{max-width:640px;color:var(--muted);margin:0 0 28px}
