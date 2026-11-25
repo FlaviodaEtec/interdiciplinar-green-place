@@ -1,0 +1,43 @@
+/* Green Place — planejador de manutenção (seção do simulador) */
+.mp{margin-top:56px;padding-top:48px;border-top:1px solid #d1ddc7}
+.mp-head h3{font-size:clamp(1.7rem,3.4vw,2.4rem);margin:0 0 10px}
+.mp-head h3 em{font-family:Georgia,"Times New Roman",serif;font-weight:400}
+.mp-head p{max-width:640px;color:var(--muted);margin:0 0 28px}
+.mp-layout{display:grid;grid-template-columns:minmax(280px,360px) minmax(0,1fr);gap:24px;align-items:start}
+.mp-form,.mp-cal{border:1px solid #d1ddc7;border-radius:18px;padding:28px}
+.mp-form{background:#f8faf4}
+.mp-cal{background:#fff}
+.mp-form h4,.mp-cal h4{font-size:1.25rem;margin:0 0 18px}
+.mp-form label{display:block;font-size:.83rem;font-weight:650;margin:16px 0 7px}
+.mp-form input,.mp-form select{display:block;width:100%;min-height:48px;border-radius:7px;border:1px solid #c4d1ba;background:#fff;color:var(--ink);padding:10px 12px;font-size:.92rem}
+.mp-form small{display:block;font-size:.7rem;line-height:1.6;color:var(--muted);margin-top:6px}
+.mp-form .btn{margin-top:22px;width:100%;justify-content:center}
+.mp-error{color:#a3291c;font-size:.82rem;min-height:1.3em;margin:12px 0 0}
+.mp-empty{color:var(--muted);font-size:.95rem;padding:34px 8px;text-align:center}
+.mp-summary{font-size:.82rem;color:var(--muted);margin:0 0 6px}
+.mp-progress{height:6px;border-radius:99px;background:#e3ebdb;overflow:hidden;margin:8px 0 18px}
+.mp-progress i{display:block;height:100%;width:0;background:#386e3e;transition:width .3s}
+.mp-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.mp-nav strong{text-transform:capitalize;font-size:1.05rem}
+.mp-nav button{width:40px;height:40px;border-radius:50%;border:1px solid #c4d1ba;background:#fff;color:var(--ink);font-size:1.2rem;cursor:pointer}
+.mp-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.mp-dow{text-align:center;font-size:.7rem;font-weight:650;color:var(--muted);padding-bottom:4px}
+.mp-day{min-height:58px;padding:5px;border-radius:8px;border:1px solid #e3ebdb;background:#fafbf6;font:inherit;font-size:.78rem;color:var(--ink);text-align:left;display:flex;flex-direction:column;gap:4px}
+button.mp-day{cursor:pointer}
+button.mp-day:hover{border-color:#386e3e}
+.mp-day.sel{outline:2px solid #386e3e}
+.mp-day.today{border-color:#386e3e;font-weight:700}
+.mp-dots{display:flex;flex-wrap:wrap;gap:3px}
+.mp-dot{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.mp-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:14px 0;font-size:.74rem;color:var(--muted)}
+.mp-legend span{display:flex;align-items:center;gap:6px}
+.mp-detail h5{margin:0 0 10px;font-size:1rem;text-transform:capitalize}
+.mp-task{border-left:5px solid var(--c);background:#f8faf4;border-radius:8px;padding:12px 14px;margin-bottom:10px}
+.mp-task label{display:flex;gap:10px;align-items:center;font-weight:650;cursor:pointer}
+.mp-task.done label span{text-decoration:line-through;opacity:.6}
+.mp-task small{display:block;color:var(--muted);margin:3px 0 0 28px;font-size:.75rem}
+.mp-task ol{margin:8px 0 0;padding-left:46px;color:var(--muted);font-size:.86rem;line-height:1.6}
+.mp-actions{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:14px}
+.mp-note{font-size:.72rem;color:var(--muted);margin:16px 0 0}
+@media (max-width:900px){.mp-layout{grid-template-columns:1fr}}
+@media (max-width:560px){.mp-form,.mp-cal{padding:20px}.mp-day{min-height:46px;font-size:.7rem;padding:3px}}

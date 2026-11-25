@@ -1,0 +1,1186 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#122e23" />
+    <meta
+      name="description"
+      content="Green Place: explore as camadas de um telhado verde, compare coberturas e organize a manutenção dos seus módulos. Um projeto interdisciplinar sobre cidades mais verdes."
+    />
+    <title>Green Place — Natureza em cada camada</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/telhado-verde.webp" as="image" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="experience.css" />
+    <link rel="stylesheet" href="maintenance.css" />
+    <script src="simulator.js" defer></script>
+    <script src="experience.js" defer></script>
+    <script src="maintenance.js" defer></script>
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <symbol id="i-leaf" viewBox="0 0 24 24">
+          <path d="M20 3C8 2 3 8 5 15c6 4 15 0 15-12Z" />
+          <path d="M3 21 15 9M8 16l-1-5m5 1 5 1" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h15m-6-6 6 6-6 6" />
+        </symbol>
+        <symbol id="i-down" viewBox="0 0 24 24">
+          <path d="M12 3v17m-6-6 6 6 6-6" />
+        </symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4" />
+          <path
+            d="M12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2"
+          />
+        </symbol>
+        <symbol id="i-rain" viewBox="0 0 24 24">
+          <path
+            d="M5 15a4 4 0 0 1-1-8 6 6 0 0 1 11-2 5 5 0 0 1 3 10M7 17l-1 4m6-4-1 4m6-4-1 4"
+          />
+        </symbol>
+        <symbol id="i-temp" viewBox="0 0 24 24">
+          <path d="M9 14V5a3 3 0 0 1 6 0v9a5 5 0 1 1-6 0Z" />
+          <path d="M12 8v9" />
+          <circle cx="12" cy="18" r="1" />
+        </symbol>
+        <symbol id="i-calendar" viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="16" rx="3" />
+          <path d="M7 2v6m10-6v6M3 11h18m-14 4h3m4 0h3m-10 3h3" />
+        </symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="m5 12 4 4L19 6" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+          <path d="m6 6 12 12M6 18 18 6" />
+        </symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </symbol>
+        <symbol id="i-grid" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+          <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" />
+        </symbol>
+      </defs>
+    </svg>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <header class="header" id="topo">
+      <a class="brand" href="#inicio" aria-label="Green Place, início"
+        ><img
+          src="assets/logo-symbol.svg"
+          class="brand-symbol"
+          alt=""
+          width="56"
+          height="46"
+        /><span
+          >GREEN <b>PLACE</b><small>NATUREZA EM CADA CAMADA</small></span
+        ></a
+      >
+      <button
+        class="menu-toggle"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        <svg aria-hidden="true" class="icon"><use href="#i-menu" /></svg>
+      </button>
+      <nav class="nav" id="main-nav" aria-label="Navegação principal">
+        <a href="#cobertura">Explore as camadas</a
+        ><a href="#beneficios">A ciência</a><a href="#exemplos">Na prática</a
+        ><a href="#simulador" class="nav-cta"
+          >Simule seu telhado <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="conteudo">
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <img
+          class="hero-image"
+          src="assets/telhado-verde.webp"
+          alt="Ilustração realista de uma casa com cobertura vegetal em meio à cidade"
+          fetchpriority="high"
+          width="1672"
+          height="941"
+        />
+        <div class="hero-shade"></div>
+        <div class="wrap hero-content">
+          <h1 id="hero-title">
+            O futuro é verde.<br /><em>Até no telhado.</em>
+          </h1>
+          <p class="hero-copy">
+            Transforme o jeito de olhar para a cidade. Explore a ciência dos
+            telhados verdes e descubra o que a natureza pode fazer lá em cima.
+          </p>
+          <a class="btn lime" href="#cobertura"
+            >Explore cada camada
+            <svg aria-hidden="true" class="icon">
+              <use href="#i-arrow" /></svg></a>
+          <div class="hero-tag">
+            <svg aria-hidden="true" class="icon"><use href="#i-leaf" /></svg
+            ><span
+              >Um projeto interdisciplinar.<br /><b
+                >Uma perspectiva mais verde.</b
+              ></span
+            >
+          </div>
+        </div>
+        <div class="wrap hero-bottom">
+          <span>APRENDA. EXPLORE. TRANSFORME.</span>
+        </div>
+      </section>
+      <section class="section cream" id="cobertura">
+        <div class="wrap">
+          <div class="intro">
+            <h2>Não é só plantar.<br />É pensar em <em>cada camada.</em></h2>
+            
+          </div>
+          <div class="layer-layout">
+            <div class="layer-copy">
+              <h3>Explore as camadas</h3>
+              <p>
+                Selecione uma etapa e descubra a função de cada parte do
+                sistema.
+              </p>
+              <div
+                id="layer-buttons"
+                class="layer-buttons"
+                role="group"
+                aria-label="Camadas do telhado verde"
+              ></div>
+              <div class="layer-detail" aria-live="polite" aria-atomic="true">
+                <span id="layer-number">01</span>
+                <div>
+                  <h4 id="layer-title">Vegetação</h4>
+                  <p id="layer-description"></p>
+                </div>
+              </div>
+            </div>
+            <div class="diagram-panel">
+              <div class="diagram-top">
+                <span><span class="live-dot"></span>EXPLORAÇÃO INTERATIVA</span
+                ><span>6 camadas</span>
+              </div>
+              <div id="roof-diagram" class="roof-diagram"></div>
+              <p class="diagram-caption">
+                Esquema didático, sem escala. As camadas e os materiais variam
+                conforme o sistema construtivo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section cream" id="comparacao">
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <h2>O mesmo telhado.<br /><em>Outras possibilidades.</em></h2>
+            </div>
+            <div
+              class="segmented"
+              role="group"
+              aria-label="Escolha o cenário da comparação"
+            >
+              <button data-scenario="sol" aria-pressed="true">
+                <svg aria-hidden="true" class="icon"><use href="#i-sun" /></svg
+                >Dia de sol</button
+              ><button data-scenario="chuva" aria-pressed="false">
+                <svg aria-hidden="true" class="icon"><use href="#i-rain" /></svg
+                >Dia de chuva
+              </button>
+            </div>
+          </div>
+          <div class="compare-grid">
+            <article class="compare-card conventional">
+              <div class="compare-label">
+                <span class="small-dot"></span>Cobertura convencional
+              </div>
+              <div
+                id="conventional-house"
+                class="house-scene"
+                aria-hidden="true"
+              ></div>
+              <h3 id="conventional-title">Superfície mais exposta</h3>
+              <p id="conventional-text"></p>
+            </article>
+            <article class="compare-card green-house">
+              <div class="compare-label">
+                <svg aria-hidden="true" class="icon"><use href="#i-leaf" /></svg
+                >Cobertura verde
+              </div>
+              <div
+                id="green-house"
+                class="house-scene"
+                aria-hidden="true"
+              ></div>
+              <h3 id="green-title">Vegetação que faz a diferença</h3>
+              <p id="green-text"></p>
+            </article>
+          </div>
+          <p class="comparison-note">
+            Comparação conceitual com uma cobertura convencional escura. Não
+            representa medições do projeto.
+          </p>
+          <div class="planning-note">
+            <svg aria-hidden="true" class="icon"><use href="#i-check" /></svg>
+            <p>
+              <b>O cuidado começa no projeto.</b> A implantação exige avaliação
+              da capacidade estrutural, impermeabilização, drenagem, escolha das
+              espécies e acesso para manutenção por profissionais habilitados.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section dark benefits" id="beneficios">
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <h2>Benefícios que se sentem<br />no dia a dia.</h2>
+            </div>
+            
+          </div>
+          <div class="benefit-grid">
+            <article class="benefit">
+              <img
+                src="assets/telhado-verde.webp"
+                alt="Casa com vegetação na cobertura e amplas janelas"
+                loading="lazy"
+                width="1672"
+                height="941"
+              />
+              <div class="benefit-copy">
+                <span class="round-icon"
+                  ><svg aria-hidden="true" class="icon">
+                    <use href="#i-temp" /></svg></span
+                ><span class="card-index">01</span>
+                <h3>Conforto térmico</h3>
+                <p>
+                  O sombreamento das plantas e a evapotranspiração ajudam a
+                  reduzir o aquecimento da cobertura.
+                </p>
+                <details class="benefit-more">
+                  <summary>
+                    Entenda o fenômeno <span aria-hidden="true">+</span>
+                  </summary>
+                  <p>
+                    O efeito combina sombra e evapotranspiração. A redução da
+                    temperatura da superfície não se converte automaticamente na
+                    mesma redução dentro do edifício.
+                  </p>
+                </details>
+              </div>
+            </article>
+            <article class="benefit">
+              <img
+                src="assets/chuva.webp"
+                alt="Gotas de chuva sobre pequenas plantas e substrato"
+                loading="lazy"
+                width="1536"
+                height="1024"
+              />
+              <div class="benefit-copy">
+                <span class="round-icon"
+                  ><svg aria-hidden="true" class="icon">
+                    <use href="#i-rain" /></svg></span
+                ><span class="card-index">02</span>
+                <h3>Água da chuva</h3>
+                <p>
+                  As plantas e o substrato retêm parte da chuva, ajudando a
+                  reduzir e retardar o escoamento.
+                </p>
+                <details class="benefit-more">
+                  <summary>
+                    Entenda o fenômeno <span aria-hidden="true">+</span>
+                  </summary>
+                  <p>
+                    Água retida pode voltar à atmosfera pela evapotranspiração.
+                    Água apenas detida escoa depois. São processos diferentes e
+                    ambos dependem das condições do sistema.
+                  </p>
+                </details>
+              </div>
+            </article>
+            <article class="benefit">
+              <img
+                src="assets/biodiversidade.webp"
+                alt="Pássaro e abelha entre flores de uma cobertura verde, imagem conceitual"
+                loading="lazy"
+                width="1536"
+                height="1024"
+              />
+              <div class="benefit-copy">
+                <span class="round-icon"
+                  ><svg aria-hidden="true" class="icon">
+                    <use href="#i-leaf" /></svg></span
+                ><span class="card-index">03</span>
+                <h3>Mais vida na cidade</h3>
+                <p>
+                  Uma seleção adequada de plantas pode oferecer alimento e
+                  abrigo para insetos e aves.
+                </p>
+                <details class="benefit-more">
+                  <summary>
+                    Entenda o fenômeno <span aria-hidden="true">+</span>
+                  </summary>
+                  <p>
+                    Flores, folhas e substrato podem oferecer alimento e abrigo.
+                    A qualidade desse habitat depende das espécies escolhidas,
+                    da manutenção e da conexão com outras áreas verdes.
+                  </p>
+                </details>
+              </div>
+            </article>
+          </div>
+          <div class="research-grid">
+            <article class="research-card">
+              <span class="data-label">Água · Penn State</span
+              ><strong><span data-count="50">50</span>–60<span>%</span></strong>
+              <h3>da chuva anual retida</h3>
+              <p>
+                Faixa relatada para coberturas com sedum e substrato de cerca de
+                9–10 cm, no centro da Pensilvânia. O desempenho muda entre
+                estações e eventos.
+              </p>
+              <a href="#fonte-psu">Ver pesquisa ↗</a>
+            </article>
+            <article class="research-card">
+              <span class="data-label">Superfície · EPA</span
+              ><strong>≈17–22<span> °C</span></strong>
+              <h3>de diferença na cobertura</h3>
+              <p>
+                A EPA reúne diferenças de 30–40 °F entre superfícies verdes e
+                convencionais. Não são graus de resfriamento do ambiente
+                interno.
+              </p>
+              <a href="#fonte-epa">Ver contexto ↗</a>
+            </article>
+            <article class="research-card">
+              <span class="data-label">Energia · EPA</span
+              ><strong>2,2–16,7<span>%</span></strong>
+              <h3>menos consumo no verão</h3>
+              <p>
+                Intervalo de um estudo de 2017 citado pela EPA. Clima,
+                isolamento e tipo de edifício limitam a aplicação desse
+                resultado a outros projetos.
+              </p>
+              <a href="#fonte-epa">Ver estudo citado ↗</a>
+            </article>
+          </div>
+          <div class="evidence-chart">
+            <div>
+              <h3>A retenção também tem estações.</h3>
+              <p>
+                Cobertura de sedum monitorada na Pensilvânia. Intervalos de
+                chuva retida, não de redução de pico de vazão.
+              </p>
+            </div>
+            <div
+              class="evidence-bars"
+              role="img"
+              aria-label="Retenção de chuva na Pensilvânia: 20 a 30 por cento nos meses frios; 50 a 60 por cento no total anual."
+            >
+              <div>
+                <span>Meses frios</span>
+                <div class="evidence-track"><i style="--bar: 30%"></i></div>
+                <b>20–30%</b>
+              </div>
+              <div>
+                <span>Total anual</span>
+                <div class="evidence-track"><i style="--bar: 60%"></i></div>
+                <b>50–60%</b>
+              </div>
+              <small
+                >O comprimento da barra representa o limite superior de cada
+                faixa. <a href="#fonte-psu">Fonte: Penn State ↗</a></small
+              >
+            </div>
+          </div>
+          <div class="eco-note">
+            <span aria-hidden="true">✳</span>
+            <div>
+              <h3>Uma peça de uma cidade mais viva</h3>
+              <p>
+                Vegetação, sombra e habitats podem complementar parques e
+                jardins urbanos. O resultado depende de espécies adaptadas,
+                manutenção e planejamento; um telhado verde não substitui o solo
+                natural.
+              </p>
+            </div>
+          </div>
+          <p class="source-note">
+            Os resultados dependem do clima, dos materiais, da vegetação e da
+            manutenção.
+            <a href="#referencias"
+              >Conheça as fontes <span aria-hidden="true">↗</span></a
+            >
+          </p>
+        </div>
+      </section>
+      <section
+        class="section simulator-section"
+        id="simulador"
+        aria-labelledby="sim-title"
+      >
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <h2 id="sim-title">
+                Mude os números.<br /><em>Veja as possibilidades.</em>
+              </h2>
+            </div>
+          </div>
+          <div class="simulator-layout">
+            <form class="sim-controls" id="sim-form">
+              <h3>Desenhe seu cenário</h3>
+              <label for="roof-area">Área do telhado <span>m²</span></label
+              ><input
+                id="roof-area"
+                type="number"
+                min="1"
+                max="10000"
+                step="any"
+                value="100"
+                required
+                aria-describedby="area-help"
+              /><small id="area-help"
+                >De 1 a 10.000 m². A área altera os volumes de água, não a
+                temperatura.</small
+              >
+              <label for="rainfall"
+                >Chuva no evento
+                <output id="rainfall-label" for="rainfall">30 mm</output></label
+              ><input
+                id="rainfall"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value="30"
+              />
+              <div class="range-labels">
+                <span>Sem chuva</span><span>100 mm</span>
+              </div>
+              <label for="substrate-depth">Espessura do substrato</label
+              ><select id="substrate-depth">
+                <option value="8">8 cm · camada rasa</option>
+                <option value="10" selected>
+                  10 cm · cenário de referência
+                </option>
+                <option value="15">15 cm · camada mais profunda</option>
+              </select>
+              <label for="initial-moisture">Umidade antes da chuva</label
+              ><select id="initial-moisture">
+                <option value="dry">
+                  Seco · 100% da capacidade disponível
+                </option>
+                <option value="moist" selected>Úmido · 50% disponível</option>
+                <option value="saturated">
+                  Saturado · nenhuma capacidade disponível
+                </option>
+              </select>
+              <label for="surface-temp"
+                >Superfície convencional ao sol
+                <output id="surface-label" for="surface-temp"
+                  >55 °C</output
+                ></label
+              ><input
+                id="surface-temp"
+                type="range"
+                min="40"
+                max="70"
+                value="55"
+              />
+              <div class="range-labels">
+                <span>40 °C</span><span>70 °C</span>
+              </div>
+              <label for="temp-difference"
+                >Diferença entre superfícies
+                <output id="difference-label" for="temp-difference"
+                  >17 °C</output
+                ></label
+              ><input
+                id="temp-difference"
+                type="range"
+                min="0"
+                max="22"
+                value="17"
+              /><small
+                >Hipótese ajustável de 0 a 22 °C, inspirada na faixa de cerca de
+                17–22 °C citada pela EPA. Zero permite explorar a ausência de
+                efeito.</small
+              >
+              <button type="reset" class="text-btn reset-sim">
+                ↺ Restaurar cenário inicial
+              </button>
+              <p id="sim-error" role="status"></p>
+            </form>
+            <div class="sim-results">
+              <div class="result-top">
+                <span>CENÁRIO EM TEMPO REAL</span
+                ><span class="educational-badge">Estimativa educativa</span>
+              </div>
+              <div class="result-stats">
+                <article>
+                  <span>Chuva recebida</span
+                  ><strong id="rain-volume">3.000 L</strong>
+                </article>
+                <article class="highlight">
+                  <span>Retida no cenário verde</span
+                  ><strong id="retained-volume">1.250 L</strong>
+                </article>
+                <article>
+                  <span>Parcela retida</span
+                  ><strong id="retained-percent">41,7%</strong>
+                </article>
+              </div>
+              <h3>Para onde vai a água?</h3>
+              <p class="chart-subtitle">
+                Litros por evento · mesma área e mesma chuva
+              </p>
+              <div
+                class="water-chart"
+                role="img"
+                id="water-chart"
+                aria-label="Comparação dos volumes de água"
+              >
+                <div class="water-row">
+                  <span>Convencional</span>
+                  <div class="water-track">
+                    <i class="water-retained" id="bar-conventional-retained"></i
+                    ><i
+                      class="water-runoff"
+                      id="bar-conventional-runoff"
+                      style="width: 100%"
+                    ></i>
+                  </div>
+                  <b id="conventional-runoff">3.000 L</b>
+                </div>
+                <div class="water-row">
+                  <span>Verde</span>
+                  <div class="water-track">
+                    <i class="water-retained" id="bar-green-retained"></i
+                    ><i class="water-runoff" id="bar-green-runoff"></i>
+                  </div>
+                  <b id="green-runoff">1.750 L</b>
+                </div>
+              </div>
+              <div class="water-legend">
+                <span><i></i>Retida</span><span><i></i>Escoamento</span>
+              </div>
+              <p class="chart-explain">
+                Os valores à direita mostram o escoamento. A cobertura
+                convencional é uma referência impermeável idealizada, com
+                retenção zero.
+              </p>
+              <div class="temperature-results">
+                <div>
+                  <span class="temp-icon" aria-hidden="true">☀</span
+                  ><span>Superfície convencional</span
+                  ><strong id="conventional-temp">55 °C</strong>
+                </div>
+                <span class="temp-arrow" aria-hidden="true">→</span>
+                <div>
+                  <span class="temp-icon" aria-hidden="true">❋</span
+                  ><span>Superfície verde hipotética</span
+                  ><strong id="green-temp">38 °C</strong>
+                </div>
+              </div>
+              <p class="temperature-note">
+                Dois experimentos independentes: a chuva representa um evento;
+                as temperaturas representam um cenário ao sol. Não calculamos
+                temperatura interna nem economia de energia.
+              </p>
+              <p
+                id="sim-summary"
+                class="sim-summary"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              ></p>
+              <button type="button" id="download-scenario" class="btn forest">
+                Baixar este cenário <span aria-hidden="true">↓</span>
+              </button>
+            </div>
+          </div>
+          <details class="methodology">
+            <summary>
+              <span>Como calculamos os resultados</span
+              ><span class="method-toggle"
+                ><span class="method-toggle-label">Ver fórmulas</span
+                ><svg
+                  class="method-chevron"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="m6 9 6 6 6-6"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  /></svg
+              ></span>
+            </summary>
+            <div>
+              <h3>Um modelo simples, com as contas à vista.</h3>
+              <p>
+                <b>Chuva recebida (L)</b> = área (m²) × chuva (mm). Uma lâmina
+                de 1 mm sobre 1 m² equivale a 1 litro.
+              </p>
+              <p>
+                <b>Capacidade disponível (mm)</b> = espessura do substrato (mm)
+                × 0,25 × fração disponível. Usamos 1 para seco, 0,5 para úmido e
+                0 para saturado. Essas frações são cenários didáticos, não
+                resultados de uma medição.
+              </p>
+              <p>
+                <b>Água retida (L)</b> = área × menor valor entre chuva e
+                capacidade disponível. <b>Escoamento (L)</b> = chuva recebida −
+                água retida. O modelo conserva o volume de água e não calcula a
+                velocidade do escoamento.
+              </p>
+              <p>
+                O fator de armazenamento de 0,25 é uma aproximação educativa: a
+                Penn State descreve que cerca de 7,6–10,2 cm de substrato podem
+                reter aproximadamente 25,4 mm de água. Não é uma propriedade
+                universal. Chuvas anteriores, intensidade, duração, drenagem e
+                espécies afetam o resultado real. Não usamos a retenção anual de
+                50–60% como se fosse uma taxa fixa de cada chuva.
+              </p>
+              <p>
+                <b>Superfície verde (°C)</b> = superfície convencional −
+                diferença escolhida. A diferença é uma hipótese do usuário,
+                baseada em uma referência de literatura; não é um modelo de
+                balanço térmico. Área, chuva e substrato não mudam essa conta. A
+                simulação de água não prevê o efeito térmico da umidade.
+              </p>
+              <p>
+                O sistema deve ser dimensionado por profissionais, inclusive
+                para peso saturado, raízes, impermeabilização e drenagem.
+                <a href="#fonte-modelo">Referência do armazenamento ↗</a> ·
+                <a href="#fonte-epa">Referência térmica ↗</a>
+              </p>
+            </div>
+          </details>
+
+          <div class="mp" id="plano-manutencao">
+            <div class="mp-head">
+              <h3>Instalou as placas?<br /><em>Receba o plano de cuidado.</em></h3>
+              <p>
+                Informe os dados da sua instalação e gere um cronograma de
+                manutenção para o primeiro ano, com passo a passo em cada dia.
+              </p>
+            </div>
+            <div class="mp-layout">
+              <form class="mp-form" id="mp-form" novalidate>
+                <h4>Dados da instalação</h4>
+                <label for="mp-date">Data da instalação</label>
+                <input id="mp-date" type="date" min="1900-01-01" max="2100-12-31" required />
+                <label for="mp-local">Local</label>
+                <input id="mp-local" type="text" maxlength="80" placeholder="Ex.: São Paulo, SP" autocomplete="off" required />
+                <label for="mp-qty">Quantidade de placas</label>
+                <input id="mp-qty" type="number" min="1" max="5000" step="1" placeholder="Ex.: 40" required />
+                <label for="mp-perimeter">Perímetro da área (m)</label>
+                <input id="mp-perimeter" type="number" min="0.1" max="2000" step="any" placeholder="Ex.: 28" required />
+                <small>Perímetros acima de 30 m recebem inspeção de borda mais frequente.</small>
+                <label for="mp-sun">Incidência solar</label>
+                <select id="mp-sun">
+                  <option value="full">Sol pleno · 6 h ou mais por dia</option>
+                  <option value="partial">Meia-sombra · 3 a 6 h por dia</option>
+                  <option value="shade">Sombra · menos de 3 h por dia</option>
+                </select>
+                <button class="btn forest" type="submit">Gerar cronograma</button>
+                <p class="mp-error" id="mp-error" role="alert"></p>
+              </form>
+              <div class="mp-cal" id="mp-result" aria-live="polite">
+                <p class="mp-empty">Preencha os dados ao lado para ver o calendário de manutenção.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section cream" id="exemplos">
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <h2>O verde encontra<br /><em>a cidade real.</em></h2>
+            </div>
+            
+          </div>
+          <div class="case-grid">
+            <article class="case-card">
+              <div class="case-visual chicago" aria-hidden="true">
+                <span>CHICAGO</span>
+                <div class="city-buildings">
+                  <i></i><i></i><i></i><i></i><i></i>
+                </div>
+                <b>2001</b>
+              </div>
+              <div class="case-content">
+                <h3>City Hall de Chicago</h3>
+                <p>
+                  Uma cobertura de pesquisa de 20.300 pés², cerca de 1.886 m²,
+                  implantada em 2001. A metade vegetada e a metade convencional
+                  do conjunto permitem comparações.
+                </p>
+                <a
+                  href="https://www.nps.gov/articles/000/green-roofs-on-historic-buildings-chicago-city-hall.htm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Conheça o projeto no NPS ↗</a
+                >
+              </div>
+            </article>
+            <article class="case-card">
+              <div class="case-visual academy" aria-hidden="true">
+                <span>SAN FRANCISCO</span>
+                <div class="living-hills"><i></i><i></i><i></i></div>
+                <b>7 colinas</b>
+              </div>
+              <div class="case-content">
+                <h3>California Academy of Sciences</h3>
+                <p>
+                  Colinas e campos cobrem 87% de uma cobertura de 2,5 acres.
+                  Plantas nativas oferecem habitat, enquanto estações
+                  meteorológicas acompanham as condições do telhado.
+                </p>
+                <a
+                  href="https://www.calacademy.org/exhibits/living-roof"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Explore o Living Roof ↗</a
+                >
+              </div>
+            </article>
+          </div>
+          <p class="source-note">
+            Ilustrações esquemáticas dos casos, não fotografias das edificações.
+            As imagens das demais seções são conceituais.
+          </p>
+        </div>
+      </section>
+      <section class="section cream" id="sobre">
+        <div class="wrap">
+          <div class="about-heading">
+            <div>
+              <h2>
+                Conhecimento que cresce<br /><em>quando a gente conecta.</em>
+              </h2>
+            </div>
+            
+          </div>
+          <div class="discipline-grid">
+            <details class="discipline-card">
+              <summary>
+                <span>01 /</span>
+                <h3>Biologia</h3>
+                <p>Um pequeno ecossistema</p>
+                <b aria-hidden="true">↗</b>
+              </summary>
+              <p>
+                Raízes, folhas e microrganismos conectam biodiversidade e
+                evapotranspiração. Espécies adaptadas ajudam a formar habitats.
+              </p>
+            </details>
+            <details class="discipline-card">
+              <summary>
+                <span>02 /</span>
+                <h3>Física</h3>
+                <p>O caminho do calor</p>
+                <b aria-hidden="true">↗</b>
+              </summary>
+              <p>
+                A radiação aquece as superfícies. Sombra, evaporação e camadas
+                de materiais alteram as trocas de energia.
+              </p>
+            </details>
+            <details class="discipline-card">
+              <summary>
+                <span>03 /</span>
+                <h3>Matemática</h3>
+                <p>A natureza também tem contas</p>
+                <b aria-hidden="true">↗</b>
+              </summary>
+              <p>
+                Área × chuva dá o volume de água. Porcentagens permitem comparar
+                a parcela retida e a que escoa.
+              </p>
+            </details>
+            <details class="discipline-card">
+              <summary>
+                <span>04 /</span>
+                <h3>Geografia</h3>
+                <p>A cidade vista de cima</p>
+                <b aria-hidden="true">↗</b>
+              </summary>
+              <p>
+                Áreas impermeáveis e pouca vegetação participam das ilhas de
+                calor. Telhados verdes integram estratégias de infraestrutura
+                verde.
+              </p>
+            </details>
+            <details class="discipline-card">
+              <summary>
+                <span>05 /</span>
+                <h3>Arquitetura</h3>
+                <p>Cada camada tem uma função</p>
+                <b aria-hidden="true">↗</b>
+              </summary>
+              <p>
+                Estrutura, impermeabilização e drenagem precisam trabalhar
+                juntas. O peso com água faz parte do dimensionamento.
+              </p>
+            </details>
+            <details class="discipline-card">
+              <summary>
+                <span>06 /</span>
+                <h3>Tecnologia</h3>
+                <p>Explore, ajuste, aprenda</p>
+                <b aria-hidden="true">↗</b>
+              </summary>
+              <p>
+                Interfaces e simulações transformam hipóteses em experiências
+                visuais. Os modelos precisam mostrar suas limitações.
+              </p>
+            </details>
+          </div>
+          <div class="team-heading">
+            <h3>Uma equipe. Diferentes olhares.</h3>
+            <span>GREEN PLACE</span>
+          </div>
+          <div class="team-grid">
+            <article>
+              <span class="initials">AJ</span>
+              <h4>Ana Julia S. Marques</h4>
+            </article>
+            <article>
+              <span class="initials">CL</span>
+              <h4>Christian L. Souza</h4>
+            </article>
+            <article>
+              <span class="initials">GL</span>
+              <h4>Giovanna da S. Lima</h4>
+            </article>
+            <article>
+              <span class="initials">EL</span>
+              <h4>Emanuelly A. S. Lima</h4>
+            </article>
+            <article>
+              <span class="initials">FS</span>
+              <h4>Flavio G. R. da Silva</h4>
+            </article>
+          </div>
+
+          <details class="care-tool">
+            <summary>
+              Planeje o cuidado: abrir calendário de manutenção
+              <span aria-hidden="true">+</span>
+            </summary>
+            <section class="section sage" id="cronograma">
+              <div class="wrap">
+                <div class="section-heading">
+                  <div>
+                    <h2>Mais verde.<br /><em>Mais bem cuidado.</em></h2>
+                  </div>
+                  
+                </div>
+                <div class="maintenance-layout">
+                  <div class="module-form-card">
+                    <div class="form-heading">
+                      <span class="round-icon"
+                        ><svg aria-hidden="true" class="icon">
+                          <use href="#i-plus" /></svg
+                      ></span>
+                      <div>
+                        <h3>Cadastre seu módulo</h3>
+                        <p>Seu primeiro passo para planejar o cuidado.</p>
+                      </div>
+                    </div>
+                    <form id="module-form">
+                      <label
+                        >Nome ou código do módulo<input
+                          id="module-code"
+                          name="code"
+                          placeholder="Ex.: Módulo 01"
+                          maxlength="45"
+                          required
+                          autocomplete="off" /></label
+                      ><label
+                        >Local de instalação<input
+                          id="module-location"
+                          name="location"
+                          placeholder="Ex.: Cobertura da maquete"
+                          maxlength="80"
+                          required
+                      /></label>
+                      <div class="form-two">
+                        <label
+                          >Data de instalação<input
+                            id="module-date"
+                            name="installed"
+                            type="date"
+                            min="1900-01-01"
+                            max="2100-12-31"
+                            required /></label
+                        ><label
+                          >Inspeção a cada<select
+                            id="module-interval"
+                            name="interval"
+                          >
+                            <option value="7">7 dias</option>
+                            <option value="15">15 dias</option>
+                            <option value="30" selected>30 dias</option>
+                            <option value="60">60 dias</option>
+                            <option value="90">90 dias</option>
+                          </select></label
+                        >
+                      </div>
+                      <button class="btn forest full" type="submit">
+                        Criar cronograma
+                        <svg aria-hidden="true" class="icon">
+                          <use href="#i-arrow" />
+                        </svg>
+                      </button>
+                      <p
+                        class="form-message"
+                        id="form-message"
+                        role="status"
+                      ></p>
+                    </form>
+                    <p class="device-note">
+                      Agenda salva neste navegador. O intervalo deve seguir as
+                      orientações do sistema instalado.
+                    </p>
+                  </div>
+                  <div class="calendar-card">
+                    <div class="calendar-heading">
+                      <div>
+                        <h3>Cronograma de inspeções</h3>
+                      </div>
+                      <svg aria-hidden="true" class="icon">
+                        <use href="#i-calendar" />
+                      </svg>
+                    </div>
+                    <div class="month-nav">
+                      <button
+                        id="prev-month"
+                        class="icon-btn"
+                        aria-label="Mês anterior"
+                      >
+                        ‹
+                      </button>
+                      <h4 id="calendar-month" aria-live="polite"></h4>
+                      <button
+                        id="next-month"
+                        class="icon-btn"
+                        aria-label="Próximo mês"
+                      >
+                        ›
+                      </button>
+                    </div>
+                    <div class="weekdays" aria-hidden="true">
+                      <span>D</span><span>S</span><span>T</span><span>Q</span
+                      ><span>Q</span><span>S</span><span>S</span>
+                    </div>
+                    <div
+                      class="calendar-grid"
+                      id="calendar-grid"
+                      role="group"
+                      aria-label="Dias do mês"
+                    ></div>
+                    <div class="calendar-legend">
+                      <span><i class="legend-dot"></i>Inspeção agendada</span
+                      ><button class="text-btn" id="today-month">
+                        Voltar a hoje
+                      </button>
+                    </div>
+                    <div
+                      class="calendar-detail"
+                      id="calendar-detail"
+                      aria-live="polite"
+                    >
+                      Cadastre um módulo para ver as datas de inspeção.
+                    </div>
+                  </div>
+                </div>
+                <div class="module-list-head">
+                  <h3>Seus módulos <span id="module-count">0</span></h3>
+                  <button id="export-calendar" class="text-btn" disabled>
+                    <svg aria-hidden="true" class="icon">
+                      <use href="#i-download" /></svg
+                    >Baixar agenda
+                  </button>
+                </div>
+                <div
+                  id="module-list"
+                  class="module-list"
+                  aria-live="polite"
+                ></div>
+              </div>
+            </section>
+          </details>
+        </div>
+      </section>
+      <section class="section references-section" id="referencias">
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <h2>Curiosidade, sim.<br /><em>Com ciência por trás.</em></h2>
+            </div>
+            
+          </div>
+          <ol class="source-list">
+            <li id="fonte-psu">
+              <span>01</span>
+              <div>
+                <h3>Penn State · Stormwater Quantity</h3>
+                <p>
+                  Retenção anual e sazonal; influência das chuvas anteriores.
+                  Pesquisa de cobertura de sedum na Pensilvânia.
+                </p>
+                <a
+                  href="https://plantscience.psu.edu/research/centers/green-roof/research/stormwater/stormwater-quantity"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Abrir pesquisa ↗</a
+                >
+              </div>
+            </li>
+            <li id="fonte-epa">
+              <span>02</span>
+              <div>
+                <h3>US EPA · Lower Building Energy Demands</h3>
+                <p>
+                  Síntese com referências de temperatura superficial e consumo
+                  de energia, incluindo o estudo de 2017 citado nos indicadores.
+                  Conversão de diferenças: °C = °F × 5/9.
+                </p>
+                <a
+                  href="https://www.epa.gov/green-infrastructure/lower-building-energy-demands"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Abrir síntese e estudos citados ↗</a
+                >
+              </div>
+            </li>
+            <li id="fonte-modelo">
+              <span>03</span>
+              <div>
+                <h3>
+                  Penn State Extension · Benefits and Design Considerations
+                </h3>
+                <p>
+                  Composição e armazenamento de água. Referência para o
+                  coeficiente simplificado do simulador: 3–4 polegadas de
+                  substrato e aproximadamente 1 polegada de água.
+                </p>
+                <a
+                  href="https://extension.psu.edu/green-roofs-benefits-and-design-considerations"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Abrir publicação técnica ↗</a
+                >
+              </div>
+            </li>
+            <li>
+              <span>04</span>
+              <div>
+                <h3>Philadelphia Water Department · Green Roofs</h3>
+                <p>
+                  Tipos de cobertura, camadas, espécies e critérios de projeto
+                  para manejo de águas pluviais.
+                </p>
+                <a
+                  href="https://water.phila.gov/development/stormwater-plan-review/manual/chapter-4/4-3-green-roofs/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Abrir manual ↗</a
+                >
+              </div>
+            </li>
+            <li>
+              <span>05</span>
+              <div>
+                <h3>National Park Service · Chicago City Hall</h3>
+                <p>
+                  Data de implantação, área e composição do caso real de
+                  Chicago.
+                </p>
+                <a
+                  href="https://www.nps.gov/articles/000/green-roofs-on-historic-buildings-chicago-city-hall.htm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Abrir estudo de caso ↗</a
+                >
+              </div>
+            </li>
+            <li>
+              <span>06</span>
+              <div>
+                <h3>California Academy of Sciences · Living Roof</h3>
+                <p>
+                  Área, vegetação nativa, colinas e monitoramento da cobertura
+                  do museu.
+                </p>
+                <a
+                  href="https://www.calacademy.org/exhibits/living-roof"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Abrir projeto ↗</a
+                >
+              </div>
+            </li>
+          </ol>
+          <p class="source-note">
+            Referências consultadas em 23 de outubro de 2026. Este site tem
+            finalidade educativa; resultados de pesquisas específicas não
+            garantem o desempenho de outra instalação.
+          </p>
+        </div>
+      </section>
+      <section class="closing">
+        <div class="wrap">
+          <svg aria-hidden="true" class="icon"><use href="#i-leaf" /></svg>
+          <p>Uma cidade mais viva<br />pode começar <em>bem aqui.</em></p>
+          <a class="btn lime" href="#inicio"
+            >Voltar ao topo
+            <svg aria-hidden="true" class="icon up"><use href="#i-down" /></svg
+          ></a>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="wrap">
+        <a class="brand" href="#inicio"
+          ><img
+            src="assets/logo-symbol.svg"
+            class="brand-symbol"
+            alt=""
+            width="56"
+            height="46"
+          /><span>GREEN <b>PLACE</b></span></a
+        ><span>Natureza, ciência e tecnologia no mesmo lugar.</span
+        ><a href="#referencias">Projeto interdisciplinar · Fontes</a>
+      </div>
+    </footer>
+    <noscript
+      ><p class="no-js">
+        Ative o JavaScript para explorar as camadas, usar o simulador e criar
+        seu cronograma. O conteúdo informativo continua disponível nesta página.
+      </p></noscript
+    >
+  </body>
+</html>
